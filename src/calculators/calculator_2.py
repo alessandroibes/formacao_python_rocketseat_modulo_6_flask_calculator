@@ -1,7 +1,7 @@
 from flask import Request as FlaskRequest
 from typing import Dict, List
 
-from src.drivers.numpy_handler import NumpyHandler
+from src.drivers.interfaces.driver_handler_interface import DriverHandlerInterface
 
 
 class Calculator2:
@@ -16,6 +16,9 @@ class Calculator2:
     * Por fim, é retirado o desvio padrão desses resultados e retornado 
       o inverso desse valor (1/result).
     '''
+
+    def __init__(self, driver_handler: DriverHandlerInterface) -> None:
+        self.__driver_handler = driver_handler
 
     def calculate(self, request: FlaskRequest) -> Dict:
         body = request.json
@@ -32,9 +35,8 @@ class Calculator2:
         return input_data
     
     def __process_data(self, input_data: List[float]) -> float:
-        numpy_handler = NumpyHandler()
         first_process_result = [(num * 11) ** 0.95 for num in input_data]
-        result = numpy_handler.standard_derivation(first_process_result)
+        result = self.__driver_handler.standard_derivation(first_process_result)
         return 1/result
     
     def __format_response(self, calculated_number: float) -> Dict:
