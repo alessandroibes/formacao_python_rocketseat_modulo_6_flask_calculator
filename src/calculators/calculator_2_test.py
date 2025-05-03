@@ -1,7 +1,6 @@
 from typing import Dict, List
 
 from .calculator_2 import Calculator2
-from src.drivers.interfaces.driver_handler_interface import DriverHandlerInterface
 from src.drivers.numpy_handler import NumpyHandler
 
 
@@ -10,7 +9,7 @@ class MockRequest:
         self.json = body
 
 
-class MockDriverHandler(DriverHandlerInterface):
+class MockDriverHandler:
     def standard_derivation(self, numbers: List[float]) -> float:
         return 12.351878184105052
 

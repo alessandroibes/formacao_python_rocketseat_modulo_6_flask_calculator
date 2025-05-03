@@ -28,7 +28,7 @@ class Calculator3:
 
         self.__verify_results(variance, multiplication)
 
-        formatted_response = self.__format_response(multiplication)
+        formatted_response = self.__format_response(variance)
         return formatted_response
 
     def __validate_body(self, body: Dict) -> List[float]:
