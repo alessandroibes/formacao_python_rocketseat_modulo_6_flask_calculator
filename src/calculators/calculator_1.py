@@ -1,6 +1,8 @@
 from flask import Request as FlaskRequest
 from typing import Dict
 
+from src.errors.http_unprocessable_entity import HttpUnprocessableEntityError
+
 
 class Calculator1:
     '''
@@ -32,7 +34,7 @@ class Calculator1:
 
     def __validate_body(self, body: Dict) -> float:
         if "number" not in body:
-            raise Exception("body mal formatado!")
+            raise HttpUnprocessableEntityError("body mal formatado!")
         
         input_data = body["number"]
         return input_data
